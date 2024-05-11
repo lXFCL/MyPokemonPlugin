@@ -9,6 +9,7 @@ import com.xfcl.pokestore.commands.command.Open;
 import com.xfcl.pokestore.util.PokeUtil;
 import com.xfcl.pokestore.util.StatTotal;
 import net.minecraft.nbt.CompressedStreamTools;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,7 +51,7 @@ public class OpenUtil extends Open {
         }
     }
 
-    public static void listener(GuiModel inv,Player player)
+    public static void listener(GuiModel inv,Player player,int page)
     {
         // 打开界面
         inv.openInventory(player);
@@ -64,21 +65,29 @@ public class OpenUtil extends Open {
                 if (itemStack == null || itemStack.getType() == Material.AIR) {
                     return;
                 }
-                for(int i = 1; i <= 6; i++)
+                for(int i = 1; i <= 5; i++)
                 {
                     if(Objects.requireNonNull(OpenUtil.data.getString("items.add" + i + ".name")).replace("&", "§").equals(Objects.requireNonNull(itemStack.getItemMeta()).getDisplayName()))
                     {
                         try {
-                            new Add(i,player);
+                            new Add(i,player,page);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
                 }
+                if(Objects.requireNonNull(OpenUtil.data.getString("items.up.name")).replace("&", "§").equals(Objects.requireNonNull(itemStack.getItemMeta()).getDisplayName()))
+                {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ps open " + player.getName() + " " + (page - 1));
+                }
+                if(Objects.requireNonNull(OpenUtil.data.getString("items.down.name")).replace("&", "§").equals(Objects.requireNonNull(itemStack.getItemMeta()).getDisplayName()))
+                {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ps open " + player.getName() + " " + (page + 1));
+                }
                 if("PIXELMON_PIXELMON_SPRITE".equals(itemStack.getType().name()))
                 {
                     try {
-                        new Take(e.getSlot(),player);
+                        new Take(e.getSlot(),player,page);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -86,8 +95,10 @@ public class OpenUtil extends Open {
             }
         });
     }
-    public static void putPokemon(GuiModel inv,Player player) throws IOException {
-        int g = INSTANCE.getConfig().getInt("Settings.start");
+    public static void putPokemon(GuiModel inv,Player player,int page) throws IOException {
+        int start = INSTANCE.getConfig().getInt("Settings.start");
+        int end = INSTANCE.getConfig().getInt("Settings.end");
+        int g = start;
         String filePath = INSTANCE.getDataFolder() + "/data/" + player.getUniqueId() + "/";
         File directory = new File(filePath);
         // 使用listFiles()获取目录中的文件和子目录
@@ -95,45 +106,55 @@ public class OpenUtil extends Open {
         // 如果files不为空，计算文件数量（不包括子目录）
         if (files != null) {
             for (File file : files) {
-                Pokemon pokemon = PokeUtil.getPokemonByFile(file);
-                SpriteHelper sprite = new SpriteHelper();
-                ItemStack itemStack = sprite.getSpriteItem(pokemon);
-                ItemMeta itemMeta = itemStack.getItemMeta();
-                assert itemMeta != null;
-                itemMeta.setDisplayName(Objects.requireNonNull(data.getString("Item.name"))
-                        .replace("%pokemon_name%",pokemon.getLocalizedName())
-                        .replace("&", "§"));
-                List<String> lore = new ArrayList<>();
-                data.getStringList("Item.lore").forEach((l) -> lore.add(l
-                        .replace("%Move1%", pokemon.getMoveset().get(0) != null ? pokemon.getMoveset().get(0).getActualMove().getLocalizedName() : "无")
-                        .replace("%Move2%", pokemon.getMoveset().get(1) != null ? pokemon.getMoveset().get(1).getActualMove().getLocalizedName() : "无")
-                        .replace("%Move3%", pokemon.getMoveset().get(2) != null ? pokemon.getMoveset().get(2).getActualMove().getLocalizedName() : "无")
-                        .replace("%Move4%", pokemon.getMoveset().get(3) != null ? pokemon.getMoveset().get(3).getActualMove().getLocalizedName() : "无")
-                        .replace("%Gender%", pokemon.getGender().getLocalizedName())
-                        .replace("%Growth%", pokemon.getGrowth().getLocalizedName())
-                        .replace("%Nature%", pokemon.getNature().getLocalizedName())
-                        .replace("%Ability%", pokemon.getAbility().getLocalizedName())
-                        .replace("%Shiny%", pokemon.isShiny() ?"是" : "否")
-                        .replace("%EVS_Attack%", pokemon.getEVs().getStat(StatsType.Attack) + "")
-                        .replace("%EVS_Defence%", pokemon.getEVs().getStat(StatsType.Defence) + "")
-                        .replace("%EVS_SpecialAttack%", pokemon.getEVs().getStat(StatsType.SpecialAttack) + "")
-                        .replace("%EVS_SpecialDefence%", pokemon.getEVs().getStat(StatsType.SpecialDefence) + "")
-                        .replace("%EVS_Speed%", pokemon.getEVs().getStat(StatsType.Speed) + "")
-                        .replace("%EVS_HP%", pokemon.getEVs().getStat(StatsType.HP) + "")
-                        .replace("%EVS_SUM%", StatTotal.total2(pokemon) + "")
-                        .replace("%IVS_Attack%", pokemon.getIVs().getStat(StatsType.Attack) + "")
-                        .replace("%IVS_Defence%", pokemon.getIVs().getStat(StatsType.Defence) + "")
-                        .replace("%IVS_SpecialAttack%", pokemon.getIVs().getStat(StatsType.SpecialAttack) + "")
-                        .replace("%IVS_SpecialDefence%", pokemon.getIVs().getStat(StatsType.SpecialDefence) + "")
-                        .replace("%IVS_Speed%", pokemon.getIVs().getStat(StatsType.Speed) + "")
-                        .replace("%IVS_HP%", pokemon.getIVs().getStat(StatsType.HP) + "")
-                        .replace("%IVS_SUM%",StatTotal.total(pokemon) + "")
-                        .replace("%Level%", pokemon.getLevel() + "")
-                        .replace("&", "§")));
-                itemMeta.setLore(lore);
-                itemStack.setItemMeta(itemMeta);
-                inv.setItem(g,itemStack);
-                g++;
+                int fileName = Integer.parseInt(file.getName().replace(".poke", ""));
+                int up = (page - 1) * (end - start + 1) + 1;
+                int down = page * (end - start + 1);
+                if(fileName >= up && fileName <= down)
+                {
+                    Pokemon pokemon = PokeUtil.getPokemonByFile(file);
+                    SpriteHelper sprite = new SpriteHelper();
+                    ItemStack itemStack = sprite.getSpriteItem(pokemon);
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    assert itemMeta != null;
+                    itemMeta.setDisplayName(Objects.requireNonNull(data.getString("Item.name"))
+                            .replace("%pokemon_name%",pokemon.getLocalizedName())
+                            .replace("&", "§"));
+                    List<String> lore = new ArrayList<>();
+                    data.getStringList("Item.lore").forEach((l) -> lore.add(l
+                            .replace("%Move1%", pokemon.getMoveset().get(0) != null ? pokemon.getMoveset().get(0).getActualMove().getLocalizedName() : "无")
+                            .replace("%Move2%", pokemon.getMoveset().get(1) != null ? pokemon.getMoveset().get(1).getActualMove().getLocalizedName() : "无")
+                            .replace("%Move3%", pokemon.getMoveset().get(2) != null ? pokemon.getMoveset().get(2).getActualMove().getLocalizedName() : "无")
+                            .replace("%Move4%", pokemon.getMoveset().get(3) != null ? pokemon.getMoveset().get(3).getActualMove().getLocalizedName() : "无")
+                            .replace("%Gender%", pokemon.getGender().getLocalizedName())
+                            .replace("%Growth%", pokemon.getGrowth().getLocalizedName())
+                            .replace("%Nature%", pokemon.getNature().getLocalizedName())
+                            .replace("%Ability%", pokemon.getAbility().getLocalizedName())
+                            .replace("%Shiny%", pokemon.isShiny() ?"是" : "否")
+                            .replace("%EVS_Attack%", pokemon.getEVs().getStat(StatsType.Attack) + "")
+                            .replace("%EVS_Defence%", pokemon.getEVs().getStat(StatsType.Defence) + "")
+                            .replace("%EVS_SpecialAttack%", pokemon.getEVs().getStat(StatsType.SpecialAttack) + "")
+                            .replace("%EVS_SpecialDefence%", pokemon.getEVs().getStat(StatsType.SpecialDefence) + "")
+                            .replace("%EVS_Speed%", pokemon.getEVs().getStat(StatsType.Speed) + "")
+                            .replace("%EVS_HP%", pokemon.getEVs().getStat(StatsType.HP) + "")
+                            .replace("%EVS_SUM%", StatTotal.total2(pokemon) + "")
+                            .replace("%IVS_Attack%", pokemon.getIVs().getStat(StatsType.Attack) + "")
+                            .replace("%IVS_Defence%", pokemon.getIVs().getStat(StatsType.Defence) + "")
+                            .replace("%IVS_SpecialAttack%", pokemon.getIVs().getStat(StatsType.SpecialAttack) + "")
+                            .replace("%IVS_SpecialDefence%", pokemon.getIVs().getStat(StatsType.SpecialDefence) + "")
+                            .replace("%IVS_Speed%", pokemon.getIVs().getStat(StatsType.Speed) + "")
+                            .replace("%IVS_HP%", pokemon.getIVs().getStat(StatsType.HP) + "")
+                            .replace("%IVS_SUM%",StatTotal.total(pokemon) + "")
+                            .replace("%Level%", pokemon.getLevel() + "")
+                            .replace("&", "§")));
+                    itemMeta.setLore(lore);
+                    itemStack.setItemMeta(itemMeta);
+                    inv.setItem(g,itemStack);
+                    g++;
+                    if(g - 1 == end)
+                    {
+                        break;
+                    }
+                }
             }
         }
     }

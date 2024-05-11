@@ -1,5 +1,5 @@
 # 界面标题
-title: "&b宝可梦仓库"
+title: "&b宝可梦仓库 &f当前页数%page%"
 # 界面大小 仅能填入 9 18 27 36 45 54
 size: 54
 # 界面物品设定
@@ -19,9 +19,15 @@ items:
       - 6
       - 7
       - 8
-      - 51
-      - 52
-      - 53
+  #请勿修改up这两个字母
+  up:
+    type: PAPER
+    name: '&6上一页'
+    data: 0
+    lore:
+      - ''
+      - '&f左键 | &b上一页'
+    slot: 45
   #请勿修改add1这三个字母
   add1:
     type: STAINED_GLASS_PANE
@@ -30,7 +36,7 @@ items:
     lore:
       - ''
       - '&f左键 | &b添加'
-    slot: 45
+    slot: 47
   #请勿修改add2这三个字母
   add2:
     type: STAINED_GLASS_PANE
@@ -39,7 +45,7 @@ items:
     lore:
       - ''
       - '&f左键 | &b添加'
-    slot: 46
+    slot: 48
   #请勿修改add3这三个字母
   add3:
     type: STAINED_GLASS_PANE
@@ -48,7 +54,7 @@ items:
     lore:
       - ''
       - '&f左键 | &b添加'
-    slot: 47
+    slot: 49
   #请勿修改add4这三个字母
   add4:
     type: STAINED_GLASS_PANE
@@ -57,7 +63,7 @@ items:
     lore:
       - ''
       - '&f左键 | &b添加'
-    slot: 48
+    slot: 50
   #请勿修改add5这三个字母
   add5:
     type: STAINED_GLASS_PANE
@@ -66,16 +72,16 @@ items:
     lore:
       - ''
       - '&f左键 | &b添加'
-    slot: 49
-  #请勿修改add6这三个字母
-  add6:
-    type: STAINED_GLASS_PANE
-    name: '&6将六号位加入仓库'
-    data: 5
+    slot: 51
+  #请勿修改down这四个字母
+  down:
+    type: PAPER
+    name: '&6下一页'
+    data: 0
     lore:
       - ''
-      - '&f左键 | &b添加'
-    slot: 50
+      - '&f左键 | &b下一页'
+    slot: 53
 Item:
   name: "&b%pokemon_name%"
   lore:

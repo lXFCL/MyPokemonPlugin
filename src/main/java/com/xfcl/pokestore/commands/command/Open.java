@@ -20,7 +20,7 @@ public class Open  {
     public static YamlConfiguration data = YamlConfiguration.loadConfiguration(file);
     public Open(CommandSender sender, String[] args) throws IOException {
         if (sender.hasPermission(INSTANCE.getConfig().getString("Permission.open"))) {
-            if(args.length != 2)
+            if(args.length != 3)
             {
                 sender.sendMessage(INSTANCE.getConfig().getString("Messages.noCommand").replace("&", "§"));
                 sender.sendMessage(INSTANCE.getConfig().getString("Commands.open").replace("&","§"));
@@ -32,11 +32,17 @@ public class Open  {
                 sender.sendMessage(INSTANCE.getConfig().getString("Messages.noPlayer").replace("&", "§"));
                 return;
             }
-            GuiModel inv = new GuiModel(data.getString("title").replace("&", "§"), data.getInt("size"));
+            int page = Integer.parseInt(args[2]);
+            if(page < 1)
+            {
+                player.sendMessage(INSTANCE.getConfig().getString("Messages.noPage").replace("&", "§"));
+                return;
+            }
+            GuiModel inv = new GuiModel(data.getString("title").replace("%page%",page + "").replace("&", "§"), data.getInt("size"));
             // 放置图标
             OpenUtil.putItem(inv);
-            OpenUtil.putPokemon(inv,player);
-            OpenUtil.listener(inv, player);
+            OpenUtil.putPokemon(inv,player,page);
+            OpenUtil.listener(inv, player, page);
         } else {
             sender.sendMessage(INSTANCE.getConfig().getString("Messages.noPermission").replace("&", "§"));
         }

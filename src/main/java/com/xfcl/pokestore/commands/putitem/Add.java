@@ -7,6 +7,7 @@ import com.xfcl.pokestore.commands.MainCommand;
 import com.xfcl.pokestore.util.FileConut;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.Objects;
  * @author Administrator
  */
 public class Add extends MainCommand {
-    public Add(int slot,Player player) throws IOException {
+    public Add(int slot,Player player,int page) throws IOException {
         PlayerPartyStorage storage = Pixelmon.storageManager.getParty(player.getUniqueId());
         Pokemon pokemon = storage.get(slot - 1);
         if(pokemon == null)
@@ -43,6 +44,6 @@ public class Add extends MainCommand {
         CompressedStreamTools.safeWrite(nbt,poke);
         storage.set(slot - 1,null);
         player.sendMessage(INSTANCE.getConfig().getString("Messages.addSuccess").replace("&", "§"));
-        player.closeInventory();
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ps open " + player.getName() + " " + page);
     }
 }
