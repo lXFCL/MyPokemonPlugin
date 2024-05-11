@@ -1,0 +1,59 @@
+
+buildscript {
+    repositories {
+        maven {
+            name = "AyStudio-Repository"
+            url = "https://repo.mc9y.com/snapshots"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+
+repositories {
+    maven {
+        name = "AyStudio-Repository"
+        url = "https://repo.mc9y.com/snapshots"
+    }
+}
+
+version = "[P][宝可梦仓库]PokeStoreV1.0-1.12.2"
+group = "com.blank038."
+archivesBaseName = ""
+
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    mappings channel: 'snapshot', version: '20171003-1.12'
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+    implementation(fileTree(dir: "libs", includes: ["*.jar"]))
+}
+
+processResources {
+    setFilteringCharset("UTF-8")
+    expand project.properties
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.yml'
+        duplicatesStrategy DuplicatesStrategy.INCLUDE
+    }
+}
+task copy(type: Copy){
+    from buildDir.absolutePath + "\\libs\\"
+    into "D:\\catserver\\1.12.2\\plugins"
+    include('**/*.jar')
+}

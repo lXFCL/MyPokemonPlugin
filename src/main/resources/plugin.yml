@@ -1,0 +1,8 @@
+name: PokeStore
+main: com.xfcl.pokestore.Main
+version: 1.0
+author: XF_CL
+commands:
+  ps:
+    aliases:
+      - pokestore

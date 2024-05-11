@@ -1,0 +1,21 @@
+Commands:
+  reload: "&b&l[仓库系统] &a➠ &f/ps reload 重载插件"
+  open: "&b&l[仓库系统] &a➠ &f/ps open <玩家> 打开某个玩家的宝可梦仓库"
+
+Permission:
+  reload: "ps.reload" #重置插件的权限名
+  open: "ps.open" #打开仓库的权限名
+
+Messages:
+  reload: "&b&l[仓库系统] &a➠ &f插件重置成功!"
+  noPermission: "&b&l[仓库系统] &a➠ &f你没有该指令的权限!"
+  noCommand: "&b&l[仓库系统] &a➠ &f输入的指令有误!"
+  noPlayer: "&b&l[仓库系统] &a➠ &f输入的玩家不在线!"
+  noPokemon: "&b&l[仓库系统] &a➠ &f该槽位没有宝可梦!"
+  noEgg: "&b&l[仓库系统] &a➠ &f禁止将蛋上传仓库!"
+  addSuccess: "&b&l[仓库系统] &a➠ &f宝可梦上传成功!"
+  noSpace: "&b&l[仓库系统] &a➠ &f已达仓库能够存放的上限!"
+
+Settings:
+  start: 9 #仓库摆放时一号仓的起始槽位
+  max: 6 #最多能够存放多少只精灵？
