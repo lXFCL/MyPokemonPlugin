@@ -1,10 +1,12 @@
 Commands:
   reload: "&b&l[仓库系统] &a➠ &f/ps reload 重载插件"
   open: "&b&l[仓库系统] &a➠ &f/ps open <玩家> <页数> 打开某个玩家的宝可梦仓库"
+  openSelf: "&b&l[仓库系统] &a➠ &f/ps open 打开自己的宝可梦仓库默认第一页"
 
 Permission:
   reload: "ps.reload" #重置插件的权限名
-  open: "ps.open" #打开仓库的权限名
+  open: "ps.open" #帮他人打开仓库的权限名
+  openSelf: "ps.openSelf" #打开自己仓库的权限名
 
 Messages:
   reload: "&b&l[仓库系统] &a➠ &f插件重置成功!"

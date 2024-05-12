@@ -19,7 +19,7 @@ repositories {
     }
 }
 
-version = "[P][宝可梦仓库]PokeStoreV1.0-1.12.2"
+version = "[P][宝可梦仓库]PokeStoreV1.2-1.12.2"
 group = "com.blank038."
 archivesBaseName = ""
 

@@ -96,7 +96,7 @@ public class Main extends JavaPlugin {
         System.out.println("§b§l[宝可梦仓库] §a-> §f插件售后交流群:928752729");
         System.out.println("§b§l[宝可梦仓库] §a-> §f需要定制插件可以进群加我");
         System.out.println("§b§l[宝可梦仓库] §a-> §f感谢你的使用");
-        System.out.println("§b§l[宝可梦仓库] §a-> §f插件版本:1.1");
+        System.out.println("§b§l[宝可梦仓库] §a-> §f插件版本:1.2");
 //        System.out.println("§b§l[宝可梦仓库] §a-> §f请在key.yml处填写授权码");
 //        System.out.println("§b§l[宝可梦仓库] §a-> §f请联系作者添加授权");
 //        System.out.println("§b§l[宝可梦仓库] §a-> §f如验证失败则返回报错");

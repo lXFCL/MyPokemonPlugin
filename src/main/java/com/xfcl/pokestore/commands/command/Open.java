@@ -19,6 +19,16 @@ public class Open  {
     public static File file = new File(INSTANCE.getDataFolder(), "store.yml");
     public static YamlConfiguration data = YamlConfiguration.loadConfiguration(file);
     public Open(CommandSender sender, String[] args) throws IOException {
+        if (sender instanceof Player)
+        {
+            if (sender.hasPermission(INSTANCE.getConfig().getString("Permission.openSelf"))) {
+                Player player = (Player) sender;
+                openIt(player,1);
+            }else {
+                sender.sendMessage(INSTANCE.getConfig().getString("Messages.noPermission").replace("&", "§"));
+            }
+            return;
+        }
         if (sender.hasPermission(INSTANCE.getConfig().getString("Permission.open"))) {
             if(args.length != 3)
             {
@@ -33,18 +43,22 @@ public class Open  {
                 return;
             }
             int page = Integer.parseInt(args[2]);
-            if(page < 1)
-            {
-                player.sendMessage(INSTANCE.getConfig().getString("Messages.noPage").replace("&", "§"));
-                return;
-            }
-            GuiModel inv = new GuiModel(data.getString("title").replace("%page%",page + "").replace("&", "§"), data.getInt("size"));
-            // 放置图标
-            OpenUtil.putItem(inv);
-            OpenUtil.putPokemon(inv,player,page);
-            OpenUtil.listener(inv, player, page);
+            openIt(player,page);
         } else {
             sender.sendMessage(INSTANCE.getConfig().getString("Messages.noPermission").replace("&", "§"));
         }
     }
+    void openIt(Player player,int page) throws IOException {
+        if(page < 1)
+        {
+            player.sendMessage(INSTANCE.getConfig().getString("Messages.noPage").replace("&", "§"));
+            return;
+        }
+        GuiModel inv = new GuiModel(data.getString("title").replace("%page%",page + "").replace("&", "§"), data.getInt("size"));
+        // 放置图标
+        OpenUtil.putItem(inv);
+        OpenUtil.putPokemon(inv,player,page);
+        OpenUtil.listener(inv, player, page);
+    }
+
 }
