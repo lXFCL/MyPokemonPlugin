@@ -1,8 +1,8 @@
-name: PokeStore
-main: com.xfcl.pokestore.Main
-version: 1.1
-author: XF_CL
+name: PokemonTeach
+version: 1.0
+main: com.yu1.pokemonteach.pokemonteach.Main
+author: Yu1
 commands:
-  ps:
+  pt:
     aliases:
-      - pokestore
+      - pokemonteach

@@ -1,0 +1,51 @@
+# 界面标题
+title: "&b当前精灵 &f%pokemon_name% &b当前页数 &f%page%"
+# 界面大小 仅能填入 9 18 27 36 45 54
+size: 54
+# 界面物品设定
+items:
+  fg:
+    type: STAINED_GLASS_PANE
+    name: '&6我只个分割版'
+    data: 15
+    lore: [ ]
+    slots:
+      - 46
+      - 47
+      - 48
+      - 49
+      - 50
+      - 51
+      - 52
+  #请勿修改up这两个字母
+  up:
+    type: PAPER
+    name: '&6上一页'
+    data: 0
+    lore:
+      - ''
+      - '&f左键 | &b上一页'
+    slot: 45
+  #请勿修改down这四个字母
+  down:
+    type: PAPER
+    name: '&6下一页'
+    data: 0
+    lore:
+      - ''
+      - '&f左键 | &b下一页'
+    slot: 53
+Cd:
+  type: PIXELMON_TM_GEN8
+  # %AttackName%后面不要加文字
+  name: '&e%AttackName%'
+  data: 1
+  lore:
+    - "&a ▶ &b属性: &f%AttackType%"
+    - "&a ▶ &b威力: &f%AttackPower%"
+    - "&a ▶ &b命中率: &f%AttackHitRate%"
+    - "&a ▶ &bPP: &f%AttackPP%"
+    - "&a ▶ &b技能类型: &f%AttackCategory%"
+    - ''
+    - '&f左键 | &b学习该技能'
+    - '&f消耗 | &b学习之星&f一个'
