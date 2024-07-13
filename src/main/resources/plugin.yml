@@ -1,8 +1,11 @@
-name: PokemonTeach
+name: ServerStore
 version: 1.0
-main: com.yu1.pokemonteach.pokemonteach.Main
+main: com.yu1.serverstore.Main
 author: Yu1
+depend:
+  - Vault
+  - PlayerPoints
 commands:
-  pt:
+  yss:
     aliases:
-      - pokemonteach
+      - ServerStore

@@ -1,51 +1,98 @@
 # 界面标题
-title: "&b当前精灵 &f%pokemon_name% &b当前页数 &f%page%"
+title: "&b全服商店"
 # 界面大小 仅能填入 9 18 27 36 45 54
 size: 54
 # 界面物品设定
 items:
+  #请勿修改up这个子id
+  up:
+    type: PAPER
+    name: '&a&l上一页'
+    amount: 1
+    lore: []
+    slot: 45
+  #请勿修改down这个子id
+  down:
+    type: PAPER
+    name: '&a&l下一页'
+    amount: 1
+    lore: [ ]
+    slot: 53
   fg:
     type: STAINED_GLASS_PANE
     name: '&6我只个分割版'
-    data: 15
-    lore: [ ]
+    amount: 1
+    lore: []
     slots:
-      - 46
-      - 47
-      - 48
-      - 49
-      - 50
-      - 51
-      - 52
-  #请勿修改up这两个字母
-  up:
-    type: PAPER
-    name: '&6上一页'
-    data: 0
+      - 36
+      - 37
+      - 38
+      - 39
+      - 40
+      - 41
+      - 42
+      - 43
+      - 44
+
+# 商店物品设定
+store:
+  # 不用填slot，插件会自动分配
+  1:
+    name: '&e下届之星'
+    type: NETHER_STAR
+    data: 0  #子id
+    amount: 1  #显示数量
+    # 所需金币
+    needEco: 10000.0
+    # 所需点券
+    needPoints: 10
+    # 个人每日限制购买几次？
+    personLimit: 1
+    # 全服每日限制购买几次?
+    serverLimit: 10
     lore:
       - ''
-      - '&f左键 | &b上一页'
-    slot: 45
-  #请勿修改down这四个字母
-  down:
-    type: PAPER
-    name: '&6下一页'
-    data: 0
+      - ' &7▌ &a商品所需货币 &7►'
+      - '   &a• &e金币 %needEco%'
+      - '   &a• &e点券 %needPoints%'
+      - ''
+      - ' &7▌ &a购买次数 &7►'
+      - '   &a• &e个人剩余: &f%personLimit%次'
+      - '   &a• &e全服剩余: &f%serverLimit%次'
+      - ''
+      - ' &7► &a右键 &f▏ 购买'
+    #执行指令
+    commands:
+      - 'give %player% 399 1'
+      - 'tell %player% &a购买成功！'
+
+
+  # 这个不能重复 指的是1，2这个头标如果设定好了 不能修改！！
+  2:
+    name: '&e苹果'
+    type: APPLE
+    data: 0  #子id
+    amount: 1  #显示数量
+    # 所需金币
+    needEco: 100.0
+    # 所需点券
+    needPoints: 0
+    # 个人每日限制购买几次？
+    personLimit: 10
+    # 全服每日限制购买几次?
+    serverLimit: 100
     lore:
       - ''
-      - '&f左键 | &b下一页'
-    slot: 53
-Cd:
-  type: PIXELMON_TM_GEN8
-  # %AttackName%后面不要加文字
-  name: '&e%AttackName%'
-  data: 1
-  lore:
-    - "&a ▶ &b属性: &f%AttackType%"
-    - "&a ▶ &b威力: &f%AttackPower%"
-    - "&a ▶ &b命中率: &f%AttackHitRate%"
-    - "&a ▶ &bPP: &f%AttackPP%"
-    - "&a ▶ &b技能类型: &f%AttackCategory%"
-    - ''
-    - '&f左键 | &b学习该技能'
-    - '&f消耗 | &b学习之星&f一个'
+      - ' &7▌ &a商品所需货币 &7►'
+      - '   &a• &e金币 %needEco%'
+      - '   &a• &e点券 %needPoints%'
+      - ''
+      - ' &7▌ &a购买次数 &7►'
+      - '   &a• &e个人剩余: &f%personLimit%次'
+      - '   &a• &e全服剩余: &f%serverLimit%次'
+      - ''
+      - ' &7► &a右键 &f▏ 购买'
+    #执行指令
+    commands:
+      - 'give %player% 260 1'
+      - 'tell %player% &a购买成功！'

@@ -9,17 +9,34 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
     }
 }
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'com.github.johnrengelman.shadow' version '4.0.2'
+}
+
+
 apply plugin: 'net.minecraftforge.gradle'
 
+
 repositories {
-    maven {
-        name = "AyStudio-Repository"
-        url = "https://repo.mc9y.com/snapshots"
+    // 采用github的repo分支依赖，实时更新。 (推荐)
+    maven { url 'https://github.com/CarmJos/EasySQL/blob/repo/' }
+}
+
+
+
+shadowJar {
+    classifier=null
+    dependencies{
+        include(dependency('cc.carm.lib:easysql-hikaricp:0.4.7'))
+        include(dependency('cc.carm.lib:easysql-api:0.4.7'))
     }
 }
 
-version = "[P][宝可梦技能学习]PokemonTeachV1.0-1.12.2"
-group = 'com.yu1.pokemonteach'
+version = "[S][全服商店]ServerStoreV1.0-1.12.2"
+group = 'com.yu1.serverstore'
 archivesBaseName = ""
 
 sourceCompatibility = targetCompatibility = '1.8'
@@ -33,7 +50,10 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    implementation(fileTree(dir: "libs", includes: ["*.jar"]))
+    compileOnly(fileTree(dir: "libs", includes: ["*.jar"]))
+
+    implementation "cc.carm.lib:easysql-hikaricp:[0.4.7]"
+    implementation "cc.carm.lib:easysql-api:[0.4.7]"
 }
 
 processResources {
@@ -51,8 +71,12 @@ processResources {
         duplicatesStrategy DuplicatesStrategy.INCLUDE
     }
 }
+
 task copy(type: Copy){
     from buildDir.absolutePath + "\\libs\\"
     into "D:\\catserver\\1.12.2\\plugins"
     include('**/*.jar')
 }
+
+
+

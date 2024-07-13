@@ -1,27 +1,45 @@
 Commands:
-  reload: "&b&l[技能学习] &a➠ &f/ps reload 重载插件"
-  open: "&b&l[技能学习] &a➠ &f/ps open <1-6槽位> 打开队伍中的1-6槽位精灵的技能学习界面"
+  reload: "&b&l[全服商店] &a➠ &f/yss reload 重载插件"
+  open: "&b&l[全服商店] &a➠ &f/yss open <玩家> 打开玩家的全服商店界面"
 
 Permission:
-  reload: "pt.reload" #重置插件的权限名
-  open: "pt.open" #帮打开学习技能界面的权限名
+  reload: "yss.reload" #重置插件的权限名
+  open: "yss.open" #帮打开界面的权限名
 
 Messages:
-  reload: "&b&l[技能学习] &a➠ &f重载成功!"
-  noCommand: "&b&l[技能学习] &a➠ &f输入的指令有误!"
-  noPermission: "&b&l[技能学习] &a➠ &f你没有该指令的权限!"
-  noPlayer: "&b&l[技能学习] &a➠ &f输入该指令的不是一个玩家!"
-  noPokemon: "&b&l[技能学习] &a➠ &f该槽位精灵不存在!"
-  noEgg: "&b&l[技能学习] &a➠ &f该槽位精灵是蛋!"
-  deleteSuccess: "&b&l[技能学习] &a➠ &f消耗学习之星成功!"
-  deleteFail: "&b&l[技能学习] &a➠ &f你的学习之星不够!"
+  reload: "&b&l[全服商店] &a➠ &f重载成功!"
+  noPermission: "&b&l[全服商店] &a➠ &f你没有该指令的权限!"
+  noPlayer: "&b&l[全服商店] &a➠ &f输入该指令的不是一个玩家!"
+  inputWrong: "&b&l[全服商店] &a➠ &f你输入的格式错误"
+  noEco: "&b&l[全服商店] &a➠ &f你没有足够的金币!"
+  noPoints: "&b&l[全服商店] &a➠ &f你没有足够的点券!"
+
+  noPersonLimit: "&b&l[全服商店] &a➠ &f该商品已达你个人购买上限!"
+  noServerLimit: "&b&l[全服商店] &a➠ &f该商品已达全服购买上限!"
+
+  noPlayerPointsAPI: "&b&l[全服商店] &a➠ &f点券插件挂钩失败请通知服主!"
+  noEconomy: "&b&l[全服商店] &a➠ &f金币插件挂钩失败请通知服主!"
 
 Settings:
-  # 是否开启学习技能后精灵加入标签 "untradeable" "unbreedable"
-  addFlag: true
-  # 检测技能学习所需的道具的lore
-  lore: "&f学习宝可梦技能的学习之星"
-  # 一次消耗几个学习之星？
-  num: 1
-  # 是否开启相同技能名称过滤世代技能碟功能?
-  sameName: true
+  # 是否启用yaml存储方式，不是的话就是启用数据库
+  yaml: true
+  # 刷新限制时间
+  times: "3:30"
+
+MySQL:
+  #ip
+  ip: "localhost"
+  #端口
+  port: "3306"
+  #数据库名称
+  database: "ServerStore"
+  #用户名
+  username: "root"
+  #密码
+  password: "123456"
+  #驱动
+  driver: "com.mysql.jdbc.Driver"
+  #数据库表名
+  tableName: "ServerStorePlayerData"
+  #全服限购数据库表名
+  serverLimitTableName: "ServerStoreServerLimit"
