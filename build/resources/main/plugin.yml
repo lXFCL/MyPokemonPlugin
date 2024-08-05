@@ -1,0 +1,9 @@
+name: WeekSign
+version: 1.0
+main: com.yu1.weeksign.Main
+author: Yu1
+commands:
+  wsn:
+    description: WeekSign command.
+    aliases:
+      - weeksign

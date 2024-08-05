@@ -1,0 +1,39 @@
+Commands:
+  reload: '&b&l[WeekSign] &a➠ &f/wsn reload 重载插件'
+  # 容器即为文件名
+  # 如7days.yml
+  # wsn open xxx 7days 无需后缀
+  open: '&b&l[WeekSign] &a➠ &f/wsn open <玩家> <签到容器> 打开某个签到gui界面'
+
+Messages:
+  reload: '&b&l[WeekSign] &a➠ &f插件重载成功'
+  inputWrong: "&b&l[WeekSign] &a➠ &f你输入的格式错误"
+  noPermission: '&b&l[WeekSign] &a➠ &f你没有权限!'
+  noPlayer: '&b&l[WeekSign] &a➠ &f你输入的玩家不在线'
+  noFile: '&b&l[WeekSign] &a➠ &f你输入的容器不存在'
+  todaySign: '&b&l[WeekSign] &a➠ &f你今天已经在这里签到过了!'
+  notSignBefore: '&b&l[WeekSign] &a➠ &f你上一天没签到过哦!'
+
+  testCreate: '&a-> &f生成演示实例成功'
+
+MySQL:
+  #ip
+  ip: "localhost"
+  #端口
+  port: "3306"
+  #数据库名称
+  database: "WeekSign"
+  #用户名
+  username: "root"
+  #密码
+  password: "123456"
+  #驱动
+  driver: "com.mysql.jdbc.Driver"
+
+Settings:
+  # 在插件加载时是否生成演示实例?
+  testCreate: true
+  # 是否开启yaml存储？如果不是则开启数据库
+  yaml: false
+  # 重置数据时间
+  times: "3:59"

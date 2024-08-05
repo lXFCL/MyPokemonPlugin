@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'com.github.johnrengelman.shadow' version '8.0.0'
+}
+
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT"
+    compileOnly(fileTree(dir: "libs", includes: ["*.jar"]))
+
+    implementation "cc.carm.lib:easysql-hikaricp:[0.4.7]"
+    implementation "cc.carm.lib:easysql-api:[0.4.7]"
+}
+
+shadowJar {
+    archiveBaseName.set('[W]WeekSign七日签到')
+    archiveClassifier.set('')
+    archiveVersion.set('V1.0')
+    dependencies{
+        include(dependency('cc.carm.lib:easysql-hikaricp:0.4.7'))
+        include(dependency('cc.carm.lib:easysql-api:0.4.7'))
+    }
+}
+
+def targetJavaVersion = 8
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+
+tasks.register('copy', Copy) {
+    // 从':shadowJar'任务获取输出
+    from(tasks.named('shadowJar').get().outputs.files)
+    into "D:\\catserver\\1.12.2\\plugins"
+    include('**/*.jar')
+
+    // 声明':shadowJar'必须在':copy'之前执行
+    mustRunAfter('shadowJar')
+}

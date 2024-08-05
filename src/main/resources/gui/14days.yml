@@ -1,0 +1,369 @@
+# 界面标题
+title: "&b14日签到"
+# 界面大小 仅能填入 9 18 27 36 45 54
+size: 36
+
+# 已签到替换的显示物品
+SignItem:
+  type: WOOL
+  data: 5
+
+show:
+  # 已签到变量显示
+  alreadySign: "&a&l✔"
+  # 未签到变量显示
+  notSign: "&c&l✘"
+
+Settings:
+  # 该容器是否开启要连续签到？
+  # 如果开启就是断签一天就重置
+  # 如果不开始就是无视断签
+  continuous: false
+  # 是否开启签到完这一轮又开启下一轮？
+  # 如果不开启则该容器不变化
+  next: true
+  # 该容器的最终天数是几天？
+  final: 14
+
+# 界面物品设定
+items:
+  fg:
+    type: STAINED_GLASS_PANE
+    name: '&6我只个分割版'
+    data: 15
+    amount: 1
+    # 没用物品day设置成0就行
+    day: 0
+    lore: []
+    slots:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 17
+      - 18
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+
+  day1:
+    type: WOOL
+    name: '&e第一天'
+    data: 14
+    amount: 1
+    # 这个是用来判断这是第几天的
+    day: 1
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 10
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day2:
+    type: WOOL
+    name: '&e第二天'
+    data: 14
+    amount: 2
+    # 这个是用来判断这是第几天的
+    day: 2
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 11
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day3:
+    type: WOOL
+    name: '&e第三天'
+    data: 14
+    amount: 3
+    # 这个是用来判断这是第几天的
+    day: 3
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 12
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day4:
+    type: WOOL
+    name: '&e第四天'
+    data: 14
+    amount: 4
+    # 这个是用来判断这是第几天的
+    day: 4
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 13
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day5:
+    type: WOOL
+    name: '&e第五天'
+    data: 14
+    amount: 5
+    # 这个是用来判断这是第几天的
+    day: 5
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 14
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day6:
+    type: WOOL
+    name: '&e第六天'
+    data: 14
+    amount: 6
+    # 这个是用来判断这是第几天的
+    day: 6
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 15
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day7:
+    type: WOOL
+    name: '&e第七天'
+    data: 14
+    amount: 7
+    # 这个是用来判断这是第几天的
+    day: 7
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 16
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day8:
+    type: WOOL
+    name: '&e第八天'
+    data: 14
+    amount: 8
+    # 这个是用来判断这是第几天的
+    day: 8
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 19
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day9:
+    type: WOOL
+    name: '&e第九天'
+    data: 14
+    amount: 9
+    # 这个是用来判断这是第几天的
+    day: 9
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 20
+    # 奖励指令
+    commands:
+     - 'give %player% diamond 1'
+     - 'eco give %player% 1000'
+
+  day10:
+    type: WOOL
+    name: '&e第十天'
+    data: 14
+    amount: 10
+    # 这个是用来判断这是第几天的
+    day: 10
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 21
+    # 奖励指令
+    commands:
+     - 'give %player% diamond 1'
+     - 'eco give %player% 1000'
+
+  day11:
+    type: WOOL
+    name: '&e第十一天'
+    data: 14
+    amount: 11
+    # 这个是用来判断这是第几天的
+    day: 11
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 22
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day12:
+    type: WOOL
+    name: '&e第十二天'
+    data: 14
+    amount: 12
+    # 这个是用来判断这是第几天的
+    day: 12
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 23
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
+  day13:
+    type: WOOL
+    name: '&e第十三天'
+    data: 14
+    amount: 13
+    # 这个是用来判断这是第几天的
+    day: 13
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 24
+    # 奖励指令
+    commands:
+     - 'give %player% diamond 1'
+     - 'eco give %player% 1000'
+
+  day14:
+    type: WOOL
+    name: '&e第十四天'
+    data: 14
+    amount: 14
+    # 这个是用来判断这是第几天的
+    day: 14
+    lore:
+      - ''
+      - ' &7▌ &a状态 &7► %isSign%'
+      - ''
+      - ' &7▌ &a签到奖励 &7►'
+      - '   &a• &e金币: &f1000'
+      - '   &a• &e钻石: &f1'
+      - ''
+      - ' &7► &a左键 &f▏ 签到'
+    slot: 25
+    # 奖励指令
+    commands:
+      - 'give %player% diamond 1'
+      - 'eco give %player% 1000'
+
